@@ -9,7 +9,7 @@ import com.credeative.budgetbuddy.dependency.db.dao.ItemDao
 
 @Database(entities = [DataExample::class], version = 1, exportSchema = false)
 abstract class IncomeDatabase : RoomDatabase() {
-    abstract suspend fun itemDao(): ItemDao
+    abstract fun itemDao(): ItemDao
 
     companion object {
         @Volatile

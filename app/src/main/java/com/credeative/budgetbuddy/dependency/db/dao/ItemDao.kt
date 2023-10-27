@@ -19,7 +19,7 @@ interface ItemDao {
     suspend fun updateSaving(dataExample: DataExample)
 
     @Query("SELECT * from items ORDER BY price ASC")
-    suspend fun getAllIncome():Flow<List<DataExample>>
+    fun getAllIncome():Flow<List<DataExample>>
 
 
 
