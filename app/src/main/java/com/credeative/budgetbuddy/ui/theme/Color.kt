@@ -12,3 +12,8 @@ val Pink40 = Color(0xFF7D5260)
 
 
 val PrimaryColor = Color(0xFF013118)
+val PrimaryColorContainer = Color(0xFF03180D)
+val PrimaryColorBg = Color(0x66FFEBD4)
+
+val BlackBorderStrokeColor = Color(0x66000000)
+val GreyBorderStrokeColor = Color(0xFFBFBFBF)
