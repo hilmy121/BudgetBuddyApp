@@ -30,7 +30,7 @@ import com.credeative.budgetbuddy.ui.theme.Shape
 
 @Composable
 fun TransactionItem(modifier:Modifier=Modifier.padding(horizontal = 10.dp)){
-    Card(modifier = modifier.fillMaxWidth(), shape = Shape.small, border = BorderStroke(0.5.dp, Color.Black)) {
+    Card(modifier = modifier.fillMaxWidth(), shape = Shape.small, border = BorderStroke(0.3.dp, Color.Gray)) {
         Surface(color = Color.White) {
             Row(modifier=modifier.padding(vertical = 15.dp), horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
                 Image(
@@ -41,7 +41,7 @@ fun TransactionItem(modifier:Modifier=Modifier.padding(horizontal = 10.dp)){
                     contentScale = ContentScale.Crop,
                     contentDescription = null)
                 Column(horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.SpaceEvenly) {
-                    Text(text = "Tumbas es", style = MaterialTheme.typography.bodyMedium, color = PrimaryColor)
+                    Text(text = "Tumbas es", style = MaterialTheme.typography.bodyLarge, color = PrimaryColor)
                     Text(text = "Pengeluaran", style = MaterialTheme.typography.bodySmall)
                     Text(text = "26 Oktober 2023", style = MaterialTheme.typography.bodySmall)
                 }

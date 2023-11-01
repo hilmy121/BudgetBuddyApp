@@ -17,3 +17,5 @@ val PrimaryColorBg = Color(0x66FFEBD4)
 
 val BlackBorderStrokeColor = Color(0x66000000)
 val GreyBorderStrokeColor = Color(0xFFBFBFBF)
+
+val PrimaryTextColor = Color(0xFF002F17)
