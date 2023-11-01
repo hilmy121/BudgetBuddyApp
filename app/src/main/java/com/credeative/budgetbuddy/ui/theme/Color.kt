@@ -1,5 +1,7 @@
 package com.credeative.budgetbuddy.ui.theme
 
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -19,3 +21,8 @@ val BlackBorderStrokeColor = Color(0x66000000)
 val GreyBorderStrokeColor = Color(0xFFBFBFBF)
 
 val PrimaryTextColor = Color(0xFF002F17)
+val linearGradientCardAmount = Brush.linearGradient(
+        colors = listOf(Color(0xff0A3A21), Color(0xff003017)),
+        start = Offset(0f, Float.POSITIVE_INFINITY),
+        end = Offset(Float.POSITIVE_INFINITY, 0f)
+)
