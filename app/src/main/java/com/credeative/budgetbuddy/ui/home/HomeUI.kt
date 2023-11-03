@@ -147,17 +147,25 @@ fun FundOption(modifier: Modifier = Modifier){
 
 @Composable
 fun FundInformation(modifier: Modifier = Modifier){
-    Card(modifier = modifier.height(70.dp), shape = Shape.small, border = BorderStroke(0.5.dp, Color.White)){
+    Card(modifier = modifier.height(75.dp), shape = Shape.small, border = BorderStroke(0.5.dp, Color.White)){
         Surface(color = PrimaryColorContainer, modifier = Modifier.fillMaxSize()) {
-            Box(modifier = Modifier.fillMaxWidth().align(alignment = Alignment.CenterHorizontally)
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .align(alignment = Alignment.CenterHorizontally)
             ){
-                Image(  painter = painterResource(id = R.drawable.bg_amount_card_green),
-                    contentDescription = null, modifier = Modifier
-                        .size(1425.dp)
-                        .fillMaxWidth(),
-                    contentScale = ContentScale.Crop
-                )
-                Column(modifier = modifier.padding(10.dp), horizontalAlignment = Alignment.Start) {
+                Row (modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.CenterEnd), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.Top){
+                    Spacer(modifier = Modifier.fillMaxWidth(0.5f))
+                    Image(
+                        painter = painterResource(id = R.drawable.bg_amount_card_green),
+                        contentDescription = null,
+                        modifier=Modifier.weight(0.5f),
+                        contentScale = ContentScale.Crop)
+                }
+                Column(modifier = modifier
+                    .padding(10.dp)
+                    .align(alignment = Alignment.Center), horizontalAlignment = Alignment.Start) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
                         Spacer(modifier = Modifier.weight(1f))
