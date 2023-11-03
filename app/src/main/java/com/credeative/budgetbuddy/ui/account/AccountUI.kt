@@ -1,6 +1,7 @@
 package com.credeative.budgetbuddy.ui.account
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,7 @@ import com.credeative.budgetbuddy.ui.theme.GreyBorderStrokeColor
 import com.credeative.budgetbuddy.ui.theme.PrimaryTextColor
 import com.credeative.budgetbuddy.ui.theme.Shape
 import com.credeative.budgetbuddy.ui.theme.Typography
+import com.credeative.budgetbuddy.ui.theme.subHeading
 
 @Composable
 fun AccountUI(){
@@ -37,7 +39,7 @@ fun AccountUI(){
         UserInformation()
 
         Spacer(modifier = Modifier.fillMaxWidth().height(50.dp))
-
+        Text(text = "Aplikasi", style = Typography.headlineMedium , color = PrimaryTextColor)
         Card(modifier = Modifier
             .fillMaxWidth()
             .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
@@ -92,14 +94,17 @@ fun UserInformation(modifier: Modifier = Modifier){
                 ) {
                     Spacer(modifier = Modifier.weight(0.5f))
                     Row(
+                        modifier = Modifier.padding(3.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Icon(
-                            modifier = Modifier.size(50.dp),
-                            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                        Spacer(modifier = Modifier.padding(start = 4.dp, top = 0.dp, end = 0.dp))
+                        Image(
+                            modifier = Modifier.size(30.dp),
+                            painter = painterResource(id = R.drawable.ic_user_home),
                             contentDescription = null
                         )
+                        Spacer(modifier = Modifier.padding(start = 4.dp, top = 0.dp, end = 4.dp))
                         Column(
                             horizontalAlignment = Alignment.Start,
                             verticalArrangement = Arrangement.SpaceEvenly
@@ -108,11 +113,13 @@ fun UserInformation(modifier: Modifier = Modifier){
                             Text(text = "cookiescaca@gmail.com", style = Typography.bodyMedium,color = PrimaryTextColor)
                         }
                         Spacer(modifier = Modifier.weight(1f))
-                        Icon(
-                            modifier = Modifier.size(50.dp),
-                            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                        Image(
+                            modifier = Modifier.size(20.dp),
+                            painter = painterResource(id = R.drawable.ic_secured_email),
                             contentDescription = null
                         )
+                        Spacer(modifier = Modifier.padding(start = 20.dp, top = 0.dp, end = 0.dp))
+
                     }
                     Spacer(modifier = Modifier.weight(1f))
                 }
