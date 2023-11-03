@@ -1,9 +1,13 @@
 package com.credeative.budgetbuddy.ui.home
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+
+
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,9 +28,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.style.TextAlign
+
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.credeative.budgetbuddy.R
@@ -84,9 +91,11 @@ fun AccountInformation(modifier: Modifier=Modifier){
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        Icon(
-            modifier = Modifier.size(50.dp),
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+        Image(
+            modifier = Modifier
+                .size(40.dp)
+                .padding(5.dp),
+            painter = painterResource(id = R.drawable.ic_user_home),
             contentDescription = null
         )
         Column(
@@ -97,9 +106,11 @@ fun AccountInformation(modifier: Modifier=Modifier){
             Text(text = "cookiescaca@gmail.com", style = Typography.bodyMedium,color = PrimaryTextColor)
         }
         Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            modifier = Modifier.size(50.dp),
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+        Image(
+            modifier = Modifier
+                .size(33.dp)
+                .padding(5.dp),
+            painter = painterResource(id = R.drawable.ic_notification_home_active),
             contentDescription = null
         )
     }
@@ -138,18 +149,30 @@ fun FundOption(modifier: Modifier = Modifier){
 fun FundInformation(modifier: Modifier = Modifier){
     Card(modifier = modifier.height(70.dp), shape = Shape.small, border = BorderStroke(0.5.dp, Color.White)){
         Surface(color = PrimaryColorContainer, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = modifier.padding(10.dp), horizontalAlignment = Alignment.Start) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
-                    Spacer(modifier = Modifier.weight(1f))
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                        contentDescription = null,
-                        modifier = Modifier.size(25.dp)
-                    )
+            Box(modifier = Modifier.fillMaxWidth().align(alignment = Alignment.CenterHorizontally)
+            ){
+                Image(  painter = painterResource(id = R.drawable.bg_amount_card_green),
+                    contentDescription = null, modifier = Modifier
+                        .size(1425.dp)
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.Crop
+                )
+                Column(modifier = modifier.padding(10.dp), horizontalAlignment = Alignment.Start) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_show_eye),
+                            contentDescription = null,
+                            modifier = Modifier.size(15.dp)
+                        )
+                    }
+                    Text(text = "Saldo Kamu", style = Typography.labelMedium, color = Color.White)
                 }
-                Text(text = "Saldo Kamu", style = Typography.labelMedium, color = Color.White)
             }
+
+
         }
     }
 }
