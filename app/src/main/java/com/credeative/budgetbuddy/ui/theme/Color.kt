@@ -26,3 +26,5 @@ val linearGradientCardAmount = Brush.linearGradient(
         start = Offset(0f, Float.POSITIVE_INFINITY),
         end = Offset(Float.POSITIVE_INFINITY, 0f)
 )
+val SecondaryCardColor = Color(0xFF2B6747)
+val TertiaryBorderColor = Color(0xFFCD5F1D)
