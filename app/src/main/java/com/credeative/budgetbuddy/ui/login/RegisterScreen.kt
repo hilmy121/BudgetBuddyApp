@@ -1,7 +1,6 @@
 package com.credeative.budgetbuddy.ui.login
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,10 +14,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,7 +29,8 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.credeative.budgetbuddy.ui.theme.SecondaryCardColor
@@ -71,18 +70,15 @@ fun RegisterUI(modifier:Modifier = Modifier){
                 nameValue = name,
                 emailValue = email,
                 modifier = Modifier.fillMaxWidth(),
-                onNameValueChange = {
-                    name = it
-                },
-                onEmailValueChange = {
-                    email = it
-                },
+                onNameValueChange = { name = it },
+                onEmailValueChange = { email = it },
                 keyboardActionsName = KeyboardActions(onNext = {
                     nameFocusRequester.requestFocus()
                 }),
                 keyboardActionsEmail = KeyboardActions(onDone = {
                     focusManager.clearFocus()
-                }), focusRequester = nameFocusRequester
+                }),
+                focusRequester = nameFocusRequester
                 )
             Spacer(modifier = modifier
                 .fillMaxWidth()
@@ -140,19 +136,23 @@ fun AccountInput(modifier: Modifier = Modifier,
                  keyboardActionsEmail: KeyboardActions) {
     Column (modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)){
         Text(text = "Nama Kamu")
-        Surface (modifier= modifier
-            .fillMaxWidth()
-            .height(50.dp), shape = Shape.small, border = BorderStroke(0.5.dp, Color.Gray)
-        ){
-            AccountTextField(onValueChange = onNameValueChange, value = nameValue, keyboardActions = keyboardActionsName)
-        }
+        AccountTextField(
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = onNameValueChange,
+            value = nameValue,
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+            keyboardActions = keyboardActionsName
+        )
         Text(text = "Email Kamu")
-        Surface (modifier= modifier
-            .fillMaxWidth()
-            .height(50.dp), shape = Shape.small, border = BorderStroke(0.5.dp, Color.Gray)
-        ){
-            AccountTextField(onValueChange = onEmailValueChange, value = emailValue, keyboardActions = keyboardActionsEmail)
-        }
+        AccountTextField(
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = onEmailValueChange,
+            focusRequester = focusRequester,
+            value = emailValue,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+            keyboardActions = keyboardActionsEmail
+        )
+
 
     }
 }
@@ -164,18 +164,38 @@ fun AccountTextField(
     onValueChange:(String)->Unit,
     value:String,
     focusRequester: FocusRequester? = null,
+    keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions){
-    TextField(
+    OutlinedTextField(
+        modifier=modifier.height(50.dp).focusProperties { focusRequester ?: FocusRequester() },
         value = value,
         onValueChange = onValueChange,
-        modifier = modifier.focusProperties { focusRequester?:FocusRequester() }.fillMaxWidth(0.8f),
-        keyboardActions = keyboardActions,
-        singleLine = true, colors = TextFieldDefaults.textFieldColors(
-            disabledTextColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent
-        ))
+        singleLine = true,
+        shape = Shape.extraSmall,
+        colors = TextFieldDefaults.outlinedTextFieldColors(containerColor = Color.White),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions)
+//    TextField(
+//        value = value,
+//        onValueChange = onValueChange,
+//        modifier = modifier
+//            .focusProperties { focusRequester ?: FocusRequester() }
+//            .fillMaxWidth(0.8f),
+//        singleLine = true,
+//        shape = Shape.small, colors = TextFieldDefaults.textFieldColors(containerColor = Color.White))
+
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun OutTextField(modifier:Modifier = Modifier){
+    OutlinedTextField(modifier = modifier
+        .fillMaxWidth(0.8f)
+        .height(50.dp),
+        value = "",
+        onValueChange = {},
+        singleLine = true,
+        shape = Shape.extraSmall,
+        colors = TextFieldDefaults.outlinedTextFieldColors(containerColor = Color.White))
 }
 
 @Preview(showBackground = true)
@@ -184,10 +204,10 @@ fun RegisterUIPreview(){
     RegisterUI()
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun AccountInputPreview(){
-
+    OutTextField()
 }
 
 

@@ -80,7 +80,13 @@ fun ContentUI(modifier: Modifier=Modifier){
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.aligned(alignment = Alignment.CenterVertically)) {
 
-        Text(modifier = modifier.padding(horizontal = 15.dp, vertical = 10.dp), text = "Transaksi Terakhir")
+        Row (modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center){
+            Text(modifier = modifier.padding(horizontal = 15.dp, vertical = 10.dp), text = "Transaksi Terakhir")
+            Spacer(modifier = Modifier.weight(1f))
+            Text(modifier = modifier.padding(horizontal = 15.dp, vertical = 10.dp), text = "Lihat Semua")
+        }
+//        LazyColumn(content = )
+
 //        LazyColumn(content = )
 
     }
