@@ -50,7 +50,7 @@ fun HomeUi(){
 }
 
 @Composable
-fun TopUi(modifier: Modifier=Modifier){
+fun HomeTopUI(modifier: Modifier=Modifier){
     Surface(modifier = modifier
         .fillMaxWidth(), shape = TopUiShape.medium, color = PrimaryColorBg) {
         Row (modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically){
@@ -170,10 +170,10 @@ fun FundInformation(modifier: Modifier = Modifier){
                         contentScale = ContentScale.Crop)
                 }
                 Column(modifier = modifier
-                    .padding(10.dp)
-                    .align(alignment = Alignment.Center), horizontalAlignment = Alignment.Start) {
+                    .padding(10.dp), horizontalAlignment = Alignment.Start) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
+                        Text(text = "Saldo Kamu", style = Typography.labelMedium, color = Color.White)
+
                         Spacer(modifier = Modifier.weight(1f))
 
                         Image(
@@ -182,7 +182,7 @@ fun FundInformation(modifier: Modifier = Modifier){
                             modifier = Modifier.size(15.dp)
                         )
                     }
-                    Text(text = "Saldo Kamu", style = Typography.labelMedium, color = Color.White)
+                    Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
                 }
             }
 
@@ -194,7 +194,7 @@ fun FundInformation(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun TopUiPreview(){
-    TopUi()
+    HomeTopUI()
 }
 
 @Preview(showBackground = true)

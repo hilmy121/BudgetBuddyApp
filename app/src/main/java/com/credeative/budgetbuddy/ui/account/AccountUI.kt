@@ -38,31 +38,11 @@ fun AccountUI(){
         .fillMaxSize(),verticalArrangement = Arrangement.spacedBy(10.dp)){
         UserInformation()
 
-        Spacer(modifier = Modifier.fillMaxWidth().height(50.dp))
-        Text(text = "Aplikasi", style = Typography.headlineMedium , color = PrimaryTextColor)
-        Card(modifier = Modifier
+        AplikasiUI()
+        PranalaUI()
+        Spacer(modifier = Modifier
             .fillMaxWidth()
-            .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
-            Surface(color = Color.White, modifier = Modifier.fillMaxSize()){
-                Column(modifier=Modifier.padding(horizontal = 10.dp),verticalArrangement = Arrangement.SpaceEvenly) {
-                    Spacer(modifier = Modifier.weight(1f))
-                    Text(text = "Tentang Kami", style = Typography.bodySmall)
-                    Spacer(modifier = Modifier.weight(1f))
-                }
-            }
-        }
-        Card(modifier = Modifier
-            .fillMaxWidth()
-            .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
-            Surface(color = Color.White, modifier = Modifier.fillMaxSize()){
-                Column(modifier=Modifier.padding(horizontal = 10.dp),verticalArrangement = Arrangement.SpaceEvenly) {
-                    Spacer(modifier = Modifier.weight(1f))
-                    Text(text = "Singkron Data Sekarang", style = Typography.bodySmall)
-                    Spacer(modifier = Modifier.weight(1f))
-                }
-            }
-        }
-        Spacer(modifier = Modifier.fillMaxWidth().height(30.dp))
+            .height(30.dp))
 
         Card(modifier = Modifier
             .fillMaxWidth()
@@ -78,20 +58,84 @@ fun AccountUI(){
     }
 }
 @Composable
-fun UserInformation(modifier: Modifier = Modifier){
+fun AplikasiUI(){
+    Spacer(modifier = Modifier
+        .fillMaxWidth()
+        .height(20.dp))
+    Text(text = "Aplikasi", style = Typography.headlineMedium , color = PrimaryTextColor)
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
+        Surface(color = Color.White, modifier = Modifier.fillMaxSize()){
+            Column(modifier=Modifier.padding(horizontal = 10.dp),verticalArrangement = Arrangement.SpaceEvenly) {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(text = "Tentang Kami", style = Typography.bodySmall)
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+    }
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
+        Surface(color = Color.White, modifier = Modifier.fillMaxSize()){
+            Column(modifier=Modifier.padding(horizontal = 10.dp),verticalArrangement = Arrangement.SpaceEvenly) {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(text = "Singkron Data Sekarang", style = Typography.bodySmall)
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+    }
+}
 
-        Card(
-            modifier = modifier
+@Composable
+fun PranalaUI(){
+    Spacer(modifier = Modifier
+        .fillMaxWidth()
+        .height(20.dp))
+    Text(text = "Pranala Umum", style = Typography.headlineMedium , color = PrimaryTextColor)
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
+        Surface(color = Color.White, modifier = Modifier.fillMaxSize()){
+            Column(modifier=Modifier.padding(horizontal = 10.dp),verticalArrangement = Arrangement.SpaceEvenly) {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(text = "Kebijakan Privasi", style = Typography.bodySmall)
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+    }
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
+        Surface(color = Color.White, modifier = Modifier.fillMaxSize()){
+            Column(modifier=Modifier.padding(horizontal = 10.dp),verticalArrangement = Arrangement.SpaceEvenly) {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(text = "Syarat dan ketentuan", style = Typography.bodySmall)
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+    }
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
+        Surface(color = Color.White, modifier = Modifier.fillMaxSize()){
+            Column(modifier=Modifier.padding(horizontal = 10.dp),verticalArrangement = Arrangement.SpaceEvenly) {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(text = "FAQ", style = Typography.bodySmall)
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+    }
+}
+@Composable
+fun UserInformation(modifier: Modifier = Modifier){
+    Surface(modifier = modifier
                 .fillMaxWidth()
-                .height(100.dp),
-            shape = Shape.small,
-            border = BorderStroke(0.5.dp, BlackBorderStrokeColor)
+                .height(85.dp),color = Color.White, shadowElevation = 10.dp, shape = Shape.small, border = BorderStroke(0.5.dp, BlackBorderStrokeColor)) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Surface(color = Color.White) {
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
                     Spacer(modifier = Modifier.weight(0.5f))
                     Row(
                         modifier = Modifier.padding(3.dp),
@@ -123,7 +167,7 @@ fun UserInformation(modifier: Modifier = Modifier){
                     }
                     Spacer(modifier = Modifier.weight(1f))
                 }
-            }
+
             
     }
 }
