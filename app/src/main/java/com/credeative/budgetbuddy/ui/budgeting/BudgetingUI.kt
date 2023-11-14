@@ -17,10 +17,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -42,8 +47,9 @@ import com.credeative.budgetbuddy.ui.theme.Typography
 import com.credeative.budgetbuddy.ui.theme.linearGradientCardAmount
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BudgetingTopUI(modifier: Modifier = Modifier, expenseSelected:Boolean = false){
+fun BudgetingTopUI(modifier: Modifier = Modifier, expenseSelected:Boolean = false,inComeOnClick:()->Unit={},expenseOnClick:()->Unit={}){
     Surface(modifier = modifier
         .fillMaxWidth(), color = Color.White) {
         Column (verticalArrangement = Arrangement.spacedBy(20.dp), horizontalAlignment = Alignment.CenterHorizontally){
@@ -52,11 +58,27 @@ fun BudgetingTopUI(modifier: Modifier = Modifier, expenseSelected:Boolean = fals
                 .fillMaxWidth(0.95f)
                 .height(40.dp), shape = Shape.small, border = BorderStroke(1.dp, color = Color.Gray)) {
                 Row (modifier = Modifier.fillMaxSize()){
-                    Card(modifier = Modifier.fillMaxHeight().weight(1f), colors = CardDefaults.cardColors(containerColor = PrimaryColorBg), shape = Shape.extraSmall) {
-
+                    Card(modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(1f), colors = CardDefaults.cardColors(containerColor =
+                    if (!expenseSelected){
+                        PrimaryColorBg}else{
+                        Color.White
+                    }), shape = Shape.extraSmall, onClick = inComeOnClick) {
+                        Box(modifier = Modifier.fillMaxSize()){
+                            Text(text = "Pemasukan", modifier = Modifier.align(alignment = Alignment.Center))
+                        }
                     }
-                    Card(modifier = Modifier.fillMaxHeight().weight(1f), colors = CardDefaults.cardColors(containerColor = Color.White), shape = Shape.extraSmall) {
-
+                    Card(modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(1f), colors = CardDefaults.cardColors(containerColor =
+                    if (expenseSelected){
+                        PrimaryColorBg}else{
+                        Color.White
+                    }), shape = Shape.extraSmall, onClick = expenseOnClick) {
+                        Box(modifier = Modifier.fillMaxSize()){
+                            Text(text = "Pengeluaran", modifier = Modifier.align(alignment = Alignment.Center))
+                        }
                     }
                 }
             }
@@ -117,5 +139,15 @@ fun FundFilter(modifier:Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun BudgetingTopUIPreview(){
-    BudgetingTopUI()
+    var expenseSelected by rememberSaveable {
+        mutableStateOf(false)
+    }
+    BudgetingTopUI(
+        expenseSelected = expenseSelected,
+        expenseOnClick = {
+            expenseSelected = true },
+        inComeOnClick = {
+            expenseSelected = false
+
+        })
 }
