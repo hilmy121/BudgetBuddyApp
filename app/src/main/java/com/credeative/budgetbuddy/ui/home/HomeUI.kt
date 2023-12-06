@@ -153,7 +153,7 @@ fun FundOption(modifier: Modifier = Modifier){
 
 @Composable
 fun FundInformation(modifier: Modifier = Modifier){
-    Card(modifier = modifier.height(75.dp), shape = Shape.small, border = BorderStroke(0.5.dp, Color.White)){
+    Card(modifier = modifier.height(105.dp), shape = Shape.small, border = BorderStroke(0.5.dp, Color.White)){
         Surface(color = PrimaryColorContainer, modifier = Modifier.fillMaxSize()) {
             Box(modifier = Modifier
                 .fillMaxWidth()
@@ -170,18 +170,8 @@ fun FundInformation(modifier: Modifier = Modifier){
                         contentScale = ContentScale.Crop)
                 }
                 Column(modifier = modifier
-                    .padding(10.dp), horizontalAlignment = Alignment.Start) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = "Saldo Kamu", style = Typography.labelMedium, color = Color.White)
-
-                        Spacer(modifier = Modifier.weight(1f))
-
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_show_eye),
-                            contentDescription = null,
-                            modifier = Modifier.size(15.dp)
-                        )
-                    }
+                    .padding(10.dp).align(Alignment.CenterStart), horizontalAlignment = Alignment.Start) {
+                    Text(text = "Saldo Kamu", style = Typography.labelMedium, color = Color.White)
                     Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
                 }
             }

@@ -32,17 +32,9 @@ fun LoginScreen(){
                 .align(Alignment.Center)
                 .fillMaxSize()
                 .padding(horizontal = 10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceAround) {
-            Spacer(modifier = Modifier.weight(0.2f))
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text(text = "Halo Buddy")
-                Text(text = "Selamat Datang")
-            }
-            Spacer(modifier = Modifier.weight(0.8f))
-            Image(painter = painterResource(id = R.drawable.ic_hero_budget_buddy_20), contentDescription = null)
-            Spacer(modifier = Modifier.weight(0.6f))
+
             Column (modifier = Modifier.fillMaxWidth(0.9f), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(15.dp)){
+                ViewpagerApp(modifier = Modifier.fillMaxWidth())
                 Text(text = "Masuk atau Mendaftar dengan Gmail kamu")
                 Surface(modifier = Modifier.fillMaxWidth(0.85f), shape = RoundedCornerShape(10.dp), shadowElevation = 5.dp
                 ) {

@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.credeative.budgetbuddy.ui.login.LoginScreen
 import com.credeative.budgetbuddy.ui.theme.BudgetBuddyTheme
 
 class LoginActivity : ComponentActivity() {
@@ -22,25 +23,10 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting2("Android")
+                    LoginScreen()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting2(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview2() {
-    BudgetBuddyTheme {
-        Greeting2("Android")
-    }
-}

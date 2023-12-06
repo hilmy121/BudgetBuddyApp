@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">BudgetBuddy</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="header1">Satu langkah besar mu disini!</string>
+    <string name="header2">Ga ada lagi yang namanya lupa</string>
+    <string name="header3">Sat Set Atur duit segampang ini.</string>
+    <string name="subheader1">Emang boleh atur duit semudah ini ?, Boleh dong bisa jelas kemana arah uangmu.</string>
+    <string name="subheader2">Lacak transaksi mu dengan mudah,
+dengan kategori dan laporan keuangan</string>
+    <string name="subheader3">Siapin semua keuanganmu untuk setiap kategori dengan mudah.</string>
 </resources>
