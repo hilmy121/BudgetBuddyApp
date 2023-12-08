@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import com.credeative.budgetbuddy.R
 import com.credeative.budgetbuddy.data.datamodel.Page
 import com.credeative.budgetbuddy.ui.theme.Typography
+import com.credeative.budgetbuddy.ui.theme.theme_light_secondary_container
+import com.credeative.budgetbuddy.ui.theme.theme_light_secondary_container_border
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -78,14 +80,20 @@ fun ViewpagerApp(modifier : Modifier = Modifier){
     })
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         HorizontalPager(
-            modifier=Modifier.fillMaxWidth().height(400.dp),
+            modifier= Modifier
+                .fillMaxWidth()
+                .height(400.dp),
             state = pagerState,
         ) {
                 index -> PageUI(modifier = Modifier.fillMaxWidth(), page = items[index])
         }
         HorizontalPagerIndicator(
             pagerState = pagerState,
-            modifier = Modifier.align(Alignment.CenterHorizontally).padding(16.dp)
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(16.dp),
+            activeColor = theme_light_secondary_container,
+            inactiveColor = theme_light_secondary_container_border
         )
     }
 }
