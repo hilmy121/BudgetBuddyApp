@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.credeative.budgetbuddy.ui.login.LoginScreen
+import com.credeative.budgetbuddy.ui.login.ViewpagerApp
+import com.credeative.budgetbuddy.ui.login.ViewpagerAppExample
 import com.credeative.budgetbuddy.ui.theme.BudgetBuddyTheme
 
 class LoginActivity : ComponentActivity() {
@@ -24,6 +26,7 @@ class LoginActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     LoginScreen()
+//                    ViewpagerApp(Modifier.fillMaxSize())
                 }
             }
         }

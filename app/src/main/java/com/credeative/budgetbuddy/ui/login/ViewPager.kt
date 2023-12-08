@@ -32,7 +32,9 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
@@ -60,50 +62,41 @@ fun ViewpagerApp(modifier : Modifier = Modifier){
     )
 
     LaunchedEffect(key1 = Unit, block = {
-        while (true){
-            yield()
-            delay(2000)
-            pagerState.animateScrollToPage(
-                page = (pagerState.currentPage + 1)%(pagerState.pageCount),
-                animationSpec = tween(1000)
-            )
+        coroutineScope {
+            launch (){
+                while (true){
+                    yield()
+                    delay(2000)
+                    pagerState.animateScrollToPage(
+                        page = (pagerState.currentPage + 1)%(pagerState.pageCount),
+                        animationSpec = tween(1000)
+                    )
+                }
+            }
+
         }
     })
-    Box (modifier = modifier){
-        Column(modifier = modifier
-            .fillMaxSize()
-            .align(Alignment.Center)) {
-//            HorizontalPager(
-//                pageCount = items.size,
-//                state = pagerState,
-//                key = { items[it].header
-//                }
-//            ) {
-//                    index -> PageUI(page = items[index])
-//            }
-            HorizontalPager(
-                state = pagerState,
-            ) {
-                    index -> PageUI(page = items[index])
-            }
-            HorizontalPagerIndicator(
-                pagerState = pagerState,
-                modifier = Modifier.align(Alignment.CenterHorizontally).padding(16.dp)
-            )
-
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        HorizontalPager(
+            modifier=Modifier.fillMaxWidth().height(400.dp),
+            state = pagerState,
+        ) {
+                index -> PageUI(modifier = Modifier.fillMaxWidth(), page = items[index])
         }
-
-
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            modifier = Modifier.align(Alignment.CenterHorizontally).padding(16.dp)
+        )
     }
 }
 
 @Composable
 fun PageUI(page:Page,modifier:Modifier = Modifier){
-    Box(modifier = modifier.fillMaxSize()){
+    Box(modifier = modifier){
         Column(
             Modifier
                 .align(Alignment.Center)
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(horizontal = 10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top) {
             Spacer(modifier = Modifier
                 .fillMaxWidth()
