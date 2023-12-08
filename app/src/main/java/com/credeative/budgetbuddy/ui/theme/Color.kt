@@ -20,7 +20,22 @@ val PrimaryColorBg = Color(0x66FFEBD4)
 val BlackBorderStrokeColor = Color(0x66000000)
 val GreyBorderStrokeColor = Color(0xFFBFBFBF)
 
-val PrimaryTextColor = Color(0xFF002F17)
+//Light
+//primary
+val theme_light_onPrimary = Color(0xFFFFFFFF)
+val theme_light_primary_container = Color(0xFF003BAE)
+val theme_light_primary_container_border = Color(0xFFA3C8FF)
+
+//secondary
+val theme_light_onSecondary = Color(0xFF797979)
+val theme_light_secondary_container = Color(0xFF78A6FF)
+val theme_light_secondary_container_border = Color(0xFFA3C8FF)
+
+//tertiary
+val theme_light_onTertiary = Color(0xFF0065FF)
+val theme_light_tertiary_container = Color(0xFF0050C9)
+
+
 val linearGradientCardAmount = Brush.linearGradient(
         colors = listOf(Color(0xff0A3A21), Color(0xff003017)),
         start = Offset(0f, Float.POSITIVE_INFINITY),

@@ -3,7 +3,6 @@ package com.credeative.budgetbuddy.ui.account
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,10 +24,9 @@ import androidx.compose.ui.unit.dp
 import com.credeative.budgetbuddy.R
 import com.credeative.budgetbuddy.ui.theme.BlackBorderStrokeColor
 import com.credeative.budgetbuddy.ui.theme.GreyBorderStrokeColor
-import com.credeative.budgetbuddy.ui.theme.PrimaryTextColor
+import com.credeative.budgetbuddy.ui.theme.theme_light_onPrimary
 import com.credeative.budgetbuddy.ui.theme.Shape
 import com.credeative.budgetbuddy.ui.theme.Typography
-import com.credeative.budgetbuddy.ui.theme.subHeading
 
 @Composable
 fun AccountUI(){
@@ -62,7 +59,7 @@ fun AplikasiUI(){
     Spacer(modifier = Modifier
         .fillMaxWidth()
         .height(20.dp))
-    Text(text = "Aplikasi", style = Typography.headlineMedium , color = PrimaryTextColor)
+    Text(text = "Aplikasi", style = Typography.headlineMedium , color = theme_light_onPrimary)
     Card(modifier = Modifier
         .fillMaxWidth()
         .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
@@ -92,7 +89,7 @@ fun PranalaUI(){
     Spacer(modifier = Modifier
         .fillMaxWidth()
         .height(20.dp))
-    Text(text = "Pranala Umum", style = Typography.headlineMedium , color = PrimaryTextColor)
+    Text(text = "Pranala Umum", style = Typography.headlineMedium , color = theme_light_onPrimary)
     Card(modifier = Modifier
         .fillMaxWidth()
         .height(25.dp), shape = Shape.extraSmall, border = BorderStroke(0.5.dp, GreyBorderStrokeColor)){
@@ -153,8 +150,8 @@ fun UserInformation(modifier: Modifier = Modifier){
                             horizontalAlignment = Alignment.Start,
                             verticalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            Text(text = "Meliusa Nora Hariyanti", style = Typography.bodyLarge, color = PrimaryTextColor)
-                            Text(text = "cookiescaca@gmail.com", style = Typography.bodyMedium,color = PrimaryTextColor)
+                            Text(text = "Meliusa Nora Hariyanti", style = Typography.bodyLarge, color = theme_light_onPrimary)
+                            Text(text = "cookiescaca@gmail.com", style = Typography.bodyMedium,color = theme_light_onPrimary)
                         }
                         Spacer(modifier = Modifier.weight(1f))
                         Image(
