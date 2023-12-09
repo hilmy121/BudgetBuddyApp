@@ -12,3 +12,6 @@ val Shape = Shapes(
 val TopUiShape = Shapes(
     medium = RoundedCornerShape(bottomEnd = 35.dp)
 )
+val CardShape = Shapes(
+
+)

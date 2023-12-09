@@ -36,6 +36,9 @@ val theme_light_onTertiary = Color(0xFF0065FF)
 val theme_light_tertiary_container = Color(0xFF0050C9)
 
 
+//Dark
+//primary
+
 val linearGradientCardAmount = Brush.linearGradient(
         colors = listOf(Color(0xff0A3A21), Color(0xff003017)),
         start = Offset(0f, Float.POSITIVE_INFINITY),

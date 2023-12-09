@@ -52,6 +52,8 @@ val Typography = Typography(
     ),
 
 
+)
+val InitialScreenTypography = Typography(
 
 )
 
