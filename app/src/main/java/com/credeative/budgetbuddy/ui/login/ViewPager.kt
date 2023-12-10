@@ -1,10 +1,14 @@
 package com.credeative.budgetbuddy.ui.login
 
 import android.util.Log
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +16,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-
+import androidx.compose.foundation.pager.rememberPagerState
 
 
 import androidx.compose.material3.Text
@@ -22,8 +26,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,9 +42,11 @@ import com.credeative.budgetbuddy.ui.theme.theme_light_secondary_container_borde
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.rememberPagerState
+
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 
@@ -67,53 +75,59 @@ fun ViewpagerApp(modifier : Modifier = Modifier){
             , img = null )
     ))
     val pagerState = rememberPagerState(
-        initialPage = 0, pageCount = items.size, infiniteLoop = true
+        pageCount = {
+            items.size
+        }, initialPage = 0
     )
+    val isDraggedState = pagerState.interactionSource.collectIsDraggedAsState()
 
 
-    LaunchedEffect(key1 = Unit, block = {
-        coroutineScope {
-            launch (){
+    LaunchedEffect(key1 = isDraggedState, block = {
+        snapshotFlow { isDraggedState.value }.collectLatest {
+            value -> if (!value){
                 while (true){
-                    yield()
+                    delay(2000)
+                    try {
+                        pagerState.animateScrollToPage(
+                            page =  if (pagerState.currentPage<pagerState.pageCount-1)pagerState.currentPage+1 else 0,
+                            animationSpec = tween(1000)
+                        )
+                    }catch (ignore:CancellationException){
 
-                    Log.i("Current Page : ",pagerState.currentPage.toString())
-                    delay(1000)
-                    pagerState.animateScrollToPage(
-                        page = if (pagerState.currentPage<pagerState.pageCount-1)pagerState.currentPage+1 else 0,
-                        animationSpec = tween(1000), skipPages = false
-                    )
-
+                    }
                 }
-
-            }
-
         }
+        }
+//        coroutineScope {
+//            launch (){
+//                while (true){
+//                    yield()
+//
+//                    Log.i("Current Page : ",pagerState.currentPage.toString())
+//                    delay(2000)
+//
+//                    pagerState.animateScrollToPage(
+//                        page =  if (pagerState.currentPage<pagerState.pageCount-1)pagerState.currentPage+1 else 0
+//                    )
+////                    pagerState.animateScrollToPage(
+////                        page = if (pagerState.currentPage<pagerState.pageCount-1)pagerState.currentPage+1 else 0,
+////                        animationSpec = tween(1000), skipPages = false
+////                    )
+//
+//                }
+//
+//            }
+//
+//        }
     })
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        HorizontalPager(
-            modifier= Modifier
-                .fillMaxWidth()
-                .height(400.dp),
-            state = pagerState, dragEnabled = false
-        ) {
-                index -> PageUI(modifier = Modifier.fillMaxWidth(), page = items[index])
+        androidx.compose.foundation.pager.HorizontalPager(modifier= Modifier
+            .fillMaxWidth()
+            .height(400.dp),state = pagerState){
+            index -> PageUI(modifier = Modifier
+            .fillMaxWidth()
+            , page = items[index])
         }
-        HorizontalPagerIndicator(
-            pagerState = pagerState,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(16.dp),
-            activeColor = theme_light_secondary_container,
-            inactiveColor = theme_light_secondary_container_border
-//            indicatorHeight = if (items[pagerState.currentPage].onDisplay){
-//                20.dp
-//            }else 5.dp,
-//            indicatorShape = if (items[pagerState.currentPage].onDisplay){
-//                com.credeative.budgetbuddy.ui.theme.Shape.small
-//            }
-//            else com.credeative.budgetbuddy.ui.theme.Shape.extraSmall
-        )
     }
 }
 

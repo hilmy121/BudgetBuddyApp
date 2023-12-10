@@ -89,7 +89,7 @@ dependencies {
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
     //UI
-    implementation ("com.google.accompanist:accompanist-pager:0.13.0")
-    implementation ("com.google.accompanist:accompanist-pager-indicators:0.13.0")
+    implementation ("com.google.accompanist:accompanist-pager:0.33.2-alpha")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.33.2-alpha")
 
 }
