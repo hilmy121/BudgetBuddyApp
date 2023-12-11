@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -28,23 +27,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.credeative.budgetbuddy.R
 import com.credeative.budgetbuddy.ui.theme.PrimaryColorBg
-import com.credeative.budgetbuddy.ui.theme.PrimaryColorContainer
 import com.credeative.budgetbuddy.ui.theme.Shape
 import com.credeative.budgetbuddy.ui.theme.TertiaryBorderColor
-import com.credeative.budgetbuddy.ui.theme.TopUiShape
 import com.credeative.budgetbuddy.ui.theme.Typography
-import com.credeative.budgetbuddy.ui.theme.linearGradientCardAmount
 
 
 @OptIn(ExperimentalMaterial3Api::class)

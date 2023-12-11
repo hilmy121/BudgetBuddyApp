@@ -1,60 +1,57 @@
 package com.credeative.budgetbuddy.ui.login
 
-import android.util.Log
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.TweenSpec
-import androidx.compose.animation.core.animateFloatAsState
+
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-
-
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.credeative.budgetbuddy.R
 import com.credeative.budgetbuddy.data.datamodel.Page
+import com.credeative.budgetbuddy.ui.theme.PrimaryColorContainer
+import com.credeative.budgetbuddy.ui.theme.Shape
 import com.credeative.budgetbuddy.ui.theme.Typography
-import com.credeative.budgetbuddy.ui.theme.theme_light_secondary_container
-import com.credeative.budgetbuddy.ui.theme.theme_light_secondary_container_border
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-
+import com.credeative.budgetbuddy.ui.theme.theme_light_tertiary_container
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.yield
+import kotlin.math.abs
 
 private const val MULTIPLIER_SELECTED_PAGE = 4
 private val baseWidth = 4.dp
-private val spacing = 10.dp
+private val spacing = 15.dp
 private val height = 8.dp
-@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ViewpagerApp(modifier : Modifier = Modifier){
     val itemIndex by rememberSaveable {
@@ -79,6 +76,7 @@ fun ViewpagerApp(modifier : Modifier = Modifier){
             items.size
         }, initialPage = 0
     )
+
     val isDraggedState = pagerState.interactionSource.collectIsDraggedAsState()
 
 
@@ -120,17 +118,48 @@ fun ViewpagerApp(modifier : Modifier = Modifier){
 //
 //        }
     })
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        androidx.compose.foundation.pager.HorizontalPager(modifier= Modifier
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        HorizontalPager(modifier= Modifier
             .fillMaxWidth()
             .height(400.dp),state = pagerState){
+
             index -> PageUI(modifier = Modifier
             .fillMaxWidth()
             , page = items[index])
         }
+        CustomViewPagerIndicator(modifier = Modifier.fillMaxWidth(),pagerState = pagerState)
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun CustomViewPagerIndicator(modifier: Modifier = Modifier,
+    pagerState: PagerState){
+    Row (){
+        val offsetIntPart = pagerState.currentPageOffsetFraction.toInt()
+        val offsetFractionalPart = pagerState.currentPageOffsetFraction - offsetIntPart
+        val currentPage = pagerState.currentPage + offsetIntPart
+        val targetPage = if (pagerState.currentPageOffsetFraction < 0) currentPage - 1 else currentPage + 1
+        val currentPageWidth = baseWidth * (1 + (1 - abs(offsetFractionalPart)) * MULTIPLIER_SELECTED_PAGE)
+        val targetPageWidth = baseWidth * (1 + abs(offsetFractionalPart) * MULTIPLIER_SELECTED_PAGE)
+        repeat(pagerState.pageCount){
+            index -> val width = when(index){
+                pagerState.currentPage -> currentPageWidth
+                pagerState.targetPage -> targetPageWidth
+                else -> baseWidth
+            }
+            Card(modifier = Modifier
+                .width(width = width)
+                .height(height = height), shape = Shape.extraSmall, colors = CardDefaults.cardColors(containerColor = theme_light_tertiary_container)) {
+
+            }
+            if (index != pagerState.pageCount-1){
+                Spacer(modifier = Modifier.width(width = spacing))
+            }
+        }
+    }
+
+}
 @Composable
 fun PageUI(page:Page,modifier:Modifier = Modifier){
     Box(modifier = modifier){
