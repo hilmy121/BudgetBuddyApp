@@ -10,14 +10,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,13 +32,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.credeative.budgetbuddy.ui.theme.SecondaryCardColor
-import com.credeative.budgetbuddy.ui.theme.Shape
 import com.credeative.budgetbuddy.ui.theme.TertiaryBorderColor
 import com.credeative.budgetbuddy.ui.theme.Typography
 
-
 @Composable
-fun RegisterUI(modifier:Modifier = Modifier){
+fun RegisterUI2(modifier: Modifier = Modifier){
     val nameFocusRequester = FocusRequester()
     val focusManager = LocalFocusManager.current
     var name by rememberSaveable {
@@ -51,21 +48,21 @@ fun RegisterUI(modifier:Modifier = Modifier){
     Box(modifier = modifier.fillMaxSize()){
         Column(
             modifier = Modifier
-                .fillMaxSize(0.9f)
+                .fillMaxWidth(0.9F)
                 .padding(start = 10.dp, end = 10.dp, top = 20.dp)
                 .align(Alignment.Center),
-            verticalArrangement = Arrangement.Top) {
+            verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.Start) {
             Spacer(modifier = modifier
                 .fillMaxWidth()
                 .height(20.dp))
-            Text(text = "Eh, Kamu orang baru ya?", style = Typography.displaySmall, modifier = Modifier
+            Text(text = "Daftar Akun", style = Typography.displaySmall, modifier = Modifier
                 .fillMaxWidth(0.7f)
                 .padding(bottom = 5.dp), maxLines = 2)
-            Text(text = "Sebelum melanjutkan, silahkan konfirmasi Nama dan email kamu yang terdaftar", style = Typography.bodySmall, modifier = Modifier.fillMaxWidth(), maxLines = 2)
+            Text(text = "Pastikan email yang kamu masukan aktif terus ya. ", style = Typography.bodySmall, modifier = Modifier.fillMaxWidth(), maxLines = 2)
             Spacer(modifier = modifier
                 .fillMaxWidth()
-                .height(50.dp))
-            AccountInput(
+                .height(35.dp))
+            RegisterForm(
                 nameValue = name,
                 emailValue = email,
                 modifier = Modifier.fillMaxWidth(),
@@ -78,10 +75,18 @@ fun RegisterUI(modifier:Modifier = Modifier){
                     focusManager.clearFocus()
                 }),
                 focusRequester = nameFocusRequester
-                )
+            )
             Spacer(modifier = modifier
                 .fillMaxWidth()
-                .weight(0.6f))
+                .weight(0.1f))
+
+            Row (verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start){
+                Checkbox(checked = false, onCheckedChange = {},modifier = Modifier.size(50.dp))
+                Text(text = "Dengan mendaftar, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi.", style = Typography.bodySmall, maxLines = 2)
+            }
+            Spacer(modifier = modifier
+                .fillMaxWidth()
+                .weight(0.1f))
             Column ( modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(15.dp)){
                 Surface(modifier = Modifier.fillMaxWidth(0.85f), shape = RoundedCornerShape(10.dp), shadowElevation = 5.dp, color = SecondaryCardColor,
                     border = BorderStroke(1.dp, TertiaryBorderColor)
@@ -93,7 +98,7 @@ fun RegisterUI(modifier:Modifier = Modifier){
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center){
 
-                        Text(text = "Semua Sudah okee!", color = Color.White)
+                        Text(text = "Daftar", color = Color.White)
 
                     }
                 }
@@ -123,8 +128,9 @@ fun RegisterUI(modifier:Modifier = Modifier){
         }
     }
 }
+
 @Composable
-fun AccountInput(modifier: Modifier = Modifier,
+fun RegisterForm(modifier: Modifier = Modifier,
                  onNameValueChange:(String)->Unit,
                  onEmailValueChange:(String)->Unit,
                  nameValue:String,
@@ -134,17 +140,35 @@ fun AccountInput(modifier: Modifier = Modifier,
                  keyboardActionsEmail: KeyboardActions
 ) {
     Column (modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)){
-        Text(text = "Nama Kamu")
+        Text(text = "Nama")
         AccountFormTextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(40.dp),
             onValueChange = onNameValueChange,
             value = nameValue,
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
             keyboardActions = keyboardActionsName
         )
-        Text(text = "Email Kamu")
+        Text(text = "Email Aktif")
         AccountFormTextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(40.dp),
+            onValueChange = onEmailValueChange,
+            focusRequester = focusRequester,
+            value = emailValue,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+            keyboardActions = keyboardActionsEmail
+        )
+        Text(text = "Password")
+        AccountFormTextField(
+            modifier = Modifier.fillMaxWidth().height(40.dp),
+            onValueChange = onEmailValueChange,
+            focusRequester = focusRequester,
+            value = emailValue,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email, imeAction = ImeAction.Done),
+            keyboardActions = keyboardActionsEmail
+        )
+        Text(text = "Konfirmasi Password")
+        AccountFormTextField(
+            modifier = Modifier.fillMaxWidth().height(40.dp),
             onValueChange = onEmailValueChange,
             focusRequester = focusRequester,
             value = emailValue,
@@ -153,34 +177,12 @@ fun AccountInput(modifier: Modifier = Modifier,
         )
 
 
+
+
     }
 }
-
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun OutTextField(modifier:Modifier = Modifier){
-    OutlinedTextField(modifier = modifier
-        .fillMaxWidth(0.8f)
-        .height(50.dp),
-        value = "",
-        onValueChange = {},
-        singleLine = true,
-        shape = Shape.extraSmall,
-        colors = TextFieldDefaults.outlinedTextFieldColors(containerColor = Color.White))
-}
-
 @Preview(showBackground = true)
 @Composable
-fun RegisterUIPreview(){
-    RegisterUI()
+fun RegisterUIPreview2(){
+    RegisterUI2()
 }
-
-@Preview(showBackground = true)
-@Composable
-fun AccountInputPreview(){
-    OutTextField()
-}
-
-
