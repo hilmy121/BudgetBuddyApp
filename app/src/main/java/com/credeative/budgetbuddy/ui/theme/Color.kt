@@ -20,6 +20,8 @@ val PrimaryColorBg = Color(0x66FFEBD4)
 val BlackBorderStrokeColor = Color(0x66000000)
 val GreyBorderStrokeColor = Color(0xFFBFBFBF)
 
+//add on
+val unchecked_checkbox = Color(0xFF0000AE)
 //Light
 //primary
 val theme_light_onPrimary = Color(0xFFFFFFFF)

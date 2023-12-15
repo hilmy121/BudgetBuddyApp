@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.credeative.budgetbuddy.ui.login.LoginScreen
+import com.credeative.budgetbuddy.ui.login.LoginOptionScreen
 import com.credeative.budgetbuddy.ui.theme.BudgetBuddyTheme
 
 class LoginActivity : ComponentActivity() {
@@ -20,7 +20,7 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen()
+                    LoginOptionScreen()
 //                    ViewpagerApp(Modifier.fillMaxSize())
                 }
             }

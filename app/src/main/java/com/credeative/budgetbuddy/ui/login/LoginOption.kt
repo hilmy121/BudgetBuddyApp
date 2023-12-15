@@ -28,7 +28,7 @@ import com.credeative.budgetbuddy.ui.theme.theme_light_secondary_container
 import com.credeative.budgetbuddy.ui.theme.theme_light_secondary_container_border
 
 @Composable
-fun LoginScreen(){
+fun LoginOptionScreen(){
     Box(modifier = Modifier.fillMaxSize()){
         Column(
             Modifier
@@ -96,5 +96,5 @@ fun LoginScreen(){
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview(){
-    LoginScreen()
+    LoginOptionScreen()
 }
