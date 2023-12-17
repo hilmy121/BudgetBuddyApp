@@ -39,7 +39,7 @@ import com.credeative.budgetbuddy.ui.theme.theme_light_primary_container_border
 import com.credeative.budgetbuddy.ui.theme.unchecked_checkbox
 
 @Composable
-fun RegisterUI2(modifier: Modifier = Modifier){
+fun RegisterUI(modifier: Modifier = Modifier){
     val nameFocusRequester = FocusRequester()
     val focusManager = LocalFocusManager.current
     var name by rememberSaveable {
@@ -54,7 +54,7 @@ fun RegisterUI2(modifier: Modifier = Modifier){
                 .fillMaxWidth(0.9F)
                 .padding(start = 10.dp, end = 10.dp, top = 20.dp)
                 .align(Alignment.Center),
-            verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
+            verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.Start) {
             Spacer(modifier = modifier
                 .fillMaxWidth()
                 .height(20.dp))
@@ -107,8 +107,13 @@ fun RegisterUI2(modifier: Modifier = Modifier){
             Spacer(modifier = modifier
                 .fillMaxWidth()
                 .height(40.dp))
-            Text(text = "Masuk atau Mendaftar dengan Gmail kamu")
-            Spacer(modifier = Modifier.fillMaxWidth().height(10.dp))
+            Box(modifier = Modifier.fillMaxWidth()){
+                Text(text = "Masuk atau Mendaftar dengan Gmail kamu",modifier = Modifier.align(
+                    Alignment.Center))
+            }
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(10.dp))
             Card (modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp), shape = RoundedCornerShape(10.dp), border = BorderStroke(width = 1.dp, color = theme_light_primary_container_border), colors = CardDefaults.cardColors(containerColor = Color.White)){
@@ -192,5 +197,5 @@ fun RegisterForm(modifier: Modifier = Modifier,
 @Preview(showBackground = true)
 @Composable
 fun PreviewRegisterUI2() {
-    RegisterUI2()
+    RegisterUI()
 }
