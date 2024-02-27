@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -117,32 +119,13 @@ fun AccountInformation(modifier: Modifier=Modifier){
 }
 @Composable
 fun FundOption(modifier: Modifier = Modifier){
-    Row (modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly){
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Surface(modifier = Modifier.size(height = 35.dp, width = 75.dp),color = Color.Transparent, border = BorderStroke(0.5.dp,Color.Gray), shape = Shape.extraSmall) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        content = {
 
-            }
-            Text(text = "Tambah Pemasukan",modifier=Modifier.width(75.dp), textAlign = TextAlign.Center, maxLines = 2, style = MaterialTheme.typography.bodySmall)
-        }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Surface(modifier = Modifier.size(height = 35.dp, width = 75.dp),color = Color.Transparent, border = BorderStroke(0.5.dp,Color.Gray), shape = Shape.extraSmall) {
-
-            }
-            Text(text = "Tambah Pengeluaran",modifier=Modifier.width(75.dp), textAlign = TextAlign.Center, maxLines = 2, style = MaterialTheme.typography.bodySmall)
-        }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Surface(modifier = Modifier.size(height = 35.dp, width = 75.dp),color = Color.Transparent, border = BorderStroke(0.5.dp,Color.Gray), shape = Shape.extraSmall) {
-
-            }
-            Text(text = "Kategori Transaksi",modifier=Modifier.width(75.dp), textAlign = TextAlign.Center, maxLines = 2, style = MaterialTheme.typography.bodySmall)
-        }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Surface(modifier = Modifier.size(height = 35.dp, width = 75.dp),color = Color.Transparent, border = BorderStroke(0.5.dp,Color.Gray), shape = Shape.extraSmall) {
-
-            }
-            Text(text = "Semua Transaksi",modifier=Modifier.width(75.dp), textAlign = TextAlign.Center, maxLines = 2, style = MaterialTheme.typography.bodySmall)
-        }
-    }
+    })
 }
 
 @Composable
@@ -164,7 +147,8 @@ fun FundInformation(modifier: Modifier = Modifier){
                         contentScale = ContentScale.Crop)
                 }
                 Column(modifier = modifier
-                    .padding(10.dp).align(Alignment.CenterStart), horizontalAlignment = Alignment.Start) {
+                    .padding(10.dp)
+                    .align(Alignment.CenterStart), horizontalAlignment = Alignment.Start) {
                     Text(text = "Saldo Kamu", style = Typography.labelMedium, color = Color.White)
                     Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
                 }
