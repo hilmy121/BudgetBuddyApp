@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import com.credeative.budgetbuddy.R
 import com.credeative.budgetbuddy.ui.theme.Shape
 
-class AccountItemUI {
 
     @Composable
     fun AccountItem(){
@@ -67,4 +66,3 @@ class AccountItemUI {
     fun AccountItemPreview(){
         AccountItem()
     }
-}
