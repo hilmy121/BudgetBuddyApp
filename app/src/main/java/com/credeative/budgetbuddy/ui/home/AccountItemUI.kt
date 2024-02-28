@@ -36,7 +36,7 @@ class AccountItemUI {
             colors = CardDefaults.cardColors()
 
         ) {
-            Box(modifier = Modifier.fillMaxSize()){
+        Box(modifier = Modifier.fillMaxSize()){
                 Column (modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .align(Alignment.TopCenter)
