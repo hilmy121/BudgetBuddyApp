@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,7 +55,7 @@ fun HomeTopUI(modifier: Modifier=Modifier){
                 AccountInformation()
                 Spacer(modifier = Modifier.size(40.dp))
                 FundInformation()
-                Spacer(modifier = Modifier.size(40.dp))
+                Spacer(modifier = Modifier.size(30.dp))
                 FundOption()
             }
             Spacer(modifier = Modifier
@@ -67,39 +65,13 @@ fun HomeTopUI(modifier: Modifier=Modifier){
 
     }
 }
-@Composable
-fun ContentUI(modifier: Modifier=Modifier){
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 15.dp),
-        horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.aligned(alignment = Alignment.CenterVertically)) {
 
-        Row (modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center){
-            Text(modifier = modifier.padding(horizontal = 15.dp, vertical = 10.dp), text = "Transaksi Terakhir")
-            Spacer(modifier = Modifier.weight(1f))
-            Text(modifier = modifier.padding(horizontal = 15.dp, vertical = 10.dp), text = "Lihat Semua")
-        }
-//        LazyColumn(content = )
-
-//        LazyColumn(content = )
-
-    }
-}
 @Composable
 fun AccountInformation(modifier: Modifier=Modifier){
     Row(modifier=modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        Image(
-            modifier = Modifier
-                .size(40.dp)
-                .padding(5.dp),
-            painter = painterResource(id = R.drawable.ic_user_home),
-            contentDescription = null
-        )
         Column(
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.SpaceEvenly
@@ -119,13 +91,37 @@ fun AccountInformation(modifier: Modifier=Modifier){
 }
 @Composable
 fun FundOption(modifier: Modifier = Modifier){
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(3),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        content = {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(15.dp),
+        horizontalAlignment = Alignment.Start) {
+        Text(text = "Daftar Akun")
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            content = {
 
-    })
+                item() {
+                    AccountItem()
+                }
+                item() {
+                    AccountItem()
+                }
+                item() {
+                    AccountItem()
+                }
+                item() {
+                    AccountItem()
+                }
+                item() {
+                    AccountItem()
+                }
+
+
+            })
+
+    }
 }
 
 @Composable
@@ -148,8 +144,8 @@ fun FundInformation(modifier: Modifier = Modifier){
                 }
                 Column(modifier = modifier
                     .padding(10.dp)
-                    .align(Alignment.CenterStart), horizontalAlignment = Alignment.Start) {
-                    Text(text = "Saldo Kamu", style = Typography.labelMedium, color = Color.White)
+                    .align(Alignment.CenterStart), horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text(text = "Aset Saya", style = Typography.labelMedium, color = Color.White)
                     Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
                 }
             }
@@ -165,11 +161,6 @@ fun TopUiPreview(){
     HomeTopUI()
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ContentUIPreview(){
-    ContentUI()
-}
 
 //@Preview(showBackground = true)
 //@Composable
