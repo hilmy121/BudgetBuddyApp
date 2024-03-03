@@ -47,7 +47,7 @@ fun PieChart(
         mutableStateOf(Offset.Zero)
     }
 
-    val inputList by remember {
+    var inputList by remember {
         mutableStateOf(input)
     }
     
@@ -69,7 +69,35 @@ fun PieChart(
         Canvas(modifier = Modifier
             .fillMaxSize()
             .pointerInput(key1 = true, block = {
+                detectTapGestures(onTap = {
+                    offset ->  val tapAngleInDegrees = (-atan2(
+                    x = circleCenter.y - offset.y,
+                    y = circleCenter.x - offset.x
+                ) * (180f / PI).toFloat() - 90f).mod(360f)
+                    val anglePerValue = 360f/input.sumOf {
+                        it.value
+                    }
+                    var currentAngle = 0f
+                    inputList.forEach { need->
+                        currentAngle += need.value * anglePerValue
 
+                        if (tapAngleInDegrees<currentAngle){
+                            val description = need.name
+                            inputList = inputList.map {
+                                if (description.equals(it.name)){
+                                    it.copy(tapped = !it.tapped)
+                                }else{
+                                    it.copy(tapped = false)
+                                }
+                            }
+                            return@detectTapGestures
+                        }
+                    }
+
+                }
+
+
+                )
             }), onDraw = {
             val width = size.width
             val height = size.height
@@ -82,7 +110,8 @@ fun PieChart(
             var currentStartAngle = 0f
             inputList.forEach { need ->
                 val angleToDraw = need.value * anglePerValue
-                scale(1.0f){
+                val scale = if (need.tapped) 1.1f else 1.0f
+                scale(scale){
                     drawArc(
                         color = need.color,
                         startAngle = currentStartAngle,
@@ -135,9 +164,9 @@ fun PieChartPreview(){
         PieChart(modifier = Modifier
             .size(10.dp)
             .align(Alignment.Center),input = listOf(
-            Needs(color = PrimaryNeeds,"Primary",15),
-            Needs(color = SecondaryNeeds,"Secondary",15),
-            Needs(color = TertiaryNeeds,"Tertiary",15)
+            Needs(color = PrimaryNeeds,"Primary",15, false),
+            Needs(color = SecondaryNeeds,"Secondary",15,false),
+            Needs(color = TertiaryNeeds,"Tertiary",15,false)
         ))
     }
 
