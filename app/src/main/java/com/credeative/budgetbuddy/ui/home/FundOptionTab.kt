@@ -1,5 +1,5 @@
 @file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
-    ExperimentalFoundationApi::class
+    ExperimentalFoundationApi::class, ExperimentalFoundationApi::class
 )
 
 package com.credeative.budgetbuddy.ui.home
@@ -34,6 +34,7 @@ import androidx.compose.material.TabPosition
 import androidx.compose.material.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -71,6 +72,9 @@ fun FundOptionTab(
         tabPosition : List<TabPosition> -> CustomIndicator(tabPositions = tabPosition, pagerState = pagerState)
     }
     ScrollableTabRow(
+        divider = @Composable{
+            Divider(color = Color.Transparent)
+        },
         backgroundColor = Color.Transparent,
         modifier = Modifier
             .height(50.dp)
@@ -121,10 +125,12 @@ private fun TransactionTab(){
         FundDialog()
         Spacer(modifier = Modifier
             .fillMaxWidth()
-            .height(25.dp))
+            .height(10.dp))
 
         Row (modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically){
-            PieChart(modifier = Modifier.height(200.dp).width(100.dp),
+            PieChart(modifier = Modifier
+                .height(200.dp)
+                .width(100.dp),
                 input = listOf(
                     Needs(color = PrimaryNeeds,"Primary",15, false),
                     Needs(color = SecondaryNeeds,"Secondary",15,false),
@@ -139,7 +145,7 @@ private fun TransactionTab(){
                     .padding(10.dp),
                 shape = RoundedCornerShape(4.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.Gray)
+                colors = CardDefaults.cardColors(containerColor = Color.White)
 
             ){
                 Column(modifier = Modifier.padding(10.dp),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(15.dp)) {
@@ -168,14 +174,16 @@ private fun AllocationTab(){
         FundDialog()
         Spacer(modifier = Modifier
             .fillMaxWidth()
-            .height(25.dp))
+            .height(10.dp))
 
         Row (modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically){
-            PieChart(modifier = Modifier.height(200.dp).width(100.dp),
+            PieChart(modifier = Modifier
+                .height(200.dp)
+                .width(100.dp),
                 input = listOf(
-                    Needs(color = PrimaryNeeds,"Primary",15, false),
-                    Needs(color = SecondaryNeeds,"Secondary",15,false),
-                    Needs(color = TertiaryNeeds,"Tertiary",15,false)
+                    Needs(color = Color(0xFF4891FF),"Primary",15, false),
+                    Needs(color = Color(0xFFFF753A),"Secondary",15,false),
+                    Needs(color = Color(0xFF00C77F),"Tertiary",15,false)
                 ),
                 radius = 240f)
 
@@ -186,7 +194,7 @@ private fun AllocationTab(){
                     .padding(10.dp),
                 shape = RoundedCornerShape(4.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.Gray)
+                colors = CardDefaults.cardColors(containerColor = Color.White)
 
             ){
                 Column(modifier = Modifier.padding(10.dp),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(15.dp)) {
@@ -262,13 +270,13 @@ private fun CustomIndicator(tabPositions: List<TabPosition>,pagerState: PagerSta
 }
 
 @Composable
-fun FundDialog(){
+private fun FundDialog(){
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight().padding(2.dp),
         shape = Shape.extraSmall,
-        colors = CardDefaults.cardColors(containerColor = Color.Gray),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)) {
         Row (modifier = Modifier
             .fillMaxWidth()

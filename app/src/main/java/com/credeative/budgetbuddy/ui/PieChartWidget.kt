@@ -39,7 +39,6 @@ import kotlin.math.atan2
 fun PieChart(
     modifier: Modifier = Modifier,
     radius:Float = 500f,
-    innerRadius:Float = radius/2,
     input:List<Needs>
 ){
 
@@ -59,12 +58,13 @@ fun PieChart(
         Animatable(0f)
     }
 
-    LaunchedEffect(key1 = animateFloat, block = {
-        animateFloat.animateTo(
-            targetValue = 1f,
-            animationSpec = tween(durationMillis = 3000, easing = LinearEasing)
-        )
-    })
+//    LaunchedEffect(key1 = animateFloat, block = {
+//        animateFloat.animateTo(
+//            targetValue = 1f,
+//            animationSpec = tween(durationMillis = 3000, easing = LinearEasing)
+//        )
+//    })
+
     Box(modifier = modifier, contentAlignment = Alignment.Center){
         Canvas(modifier = Modifier
             .fillMaxSize()
@@ -121,41 +121,18 @@ fun PieChart(
                         topLeft = Offset(x = (width-radius*2f/2), y = (height-radius*2f)/2) )
                     currentStartAngle += angleToDraw
                 }
-                var rotateAngle = currentStartAngle-angleToDraw/2f-90f
-                var factor = 1f
 
-                if (rotateAngle>90f){
-                    rotateAngle = (rotateAngle+180).mod(360f)
-                    factor = -0.92f
-                }
-                val percentage = (need.value/totalValue.toFloat()*100).toInt()
 
-                drawContext.canvas.nativeCanvas.apply {
-                    if (percentage>3){
-                        rotate(rotateAngle){
-                            drawText(
-                                "$percentage %",
-                                circleCenter.x,
-                                (circleCenter.y+(radius-(radius-(innerRadius*0.2))/2f)*factor).toFloat(),
-                                android.graphics.Paint().apply {
-                                    textSize = 13.sp.toPx()
-                                    textAlign = android.graphics.Paint.Align.CENTER
-                                    color = Color.White.toArgb()
-                                }
-                            )
-                        }
-                    }
-                }
+
+
+
             }
 
         })
     }
 }
 
-@Composable
-fun SubPieChart(){
 
-}
 
 @Composable
 @Preview
