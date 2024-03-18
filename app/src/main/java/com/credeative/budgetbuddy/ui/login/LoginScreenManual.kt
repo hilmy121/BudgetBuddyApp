@@ -35,7 +35,7 @@ import com.credeative.budgetbuddy.ui.theme.theme_light_primary_container_border
 
 
 @Composable
-fun ManualLoginUI(modifier:Modifier = Modifier){
+fun ManualLoginUI(modifier:Modifier = Modifier,isError:Boolean){
     val nameFocusRequester = FocusRequester()
     val focusManager = LocalFocusManager.current
     var name by rememberSaveable {
@@ -61,6 +61,14 @@ fun ManualLoginUI(modifier:Modifier = Modifier){
             Spacer(modifier = modifier
                 .fillMaxWidth()
                 .height(50.dp))
+
+            if (isError){
+                LoginDialog(errorMessage = "Username atau Password Kamu salah")
+                Spacer(modifier = modifier
+                    .fillMaxWidth()
+                    .height(20.dp))
+            }
+            
             LoginAccountForm(
                 nameValue = name,
                 emailValue = email,
@@ -139,7 +147,7 @@ fun LoginAccountForm(modifier: Modifier = Modifier,
 @Preview(showBackground = true)
 @Composable
 fun RegisterUIPreview(){
-    ManualLoginUI()
+    ManualLoginUI(isError = true)
 }
 
 

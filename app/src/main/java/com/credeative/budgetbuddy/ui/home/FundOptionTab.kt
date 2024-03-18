@@ -24,6 +24,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -61,7 +63,8 @@ import kotlin.coroutines.CoroutineContext
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FundOptionTab(
-    
+    transactions:List<Needs>,
+    allocations:List<Needs>
 ){
     val pages = listOf<String>("Transaksi","Alokasi Kebutuhan")
     val pagerState = rememberPagerState {
@@ -104,8 +107,8 @@ fun FundOptionTab(
             .wrapContentHeight(),
         state = pagerState) {
             page ->  when(page){
-                0 -> TransactionTab()
-                1 -> AllocationTab()
+                0 -> TransactionTab(transactions)
+                1 -> AllocationTab(allocations)
             }
 
     }
@@ -113,7 +116,7 @@ fun FundOptionTab(
 }
 
 @Composable
-private fun TransactionTab(){
+private fun TransactionTab(transactions: List<Needs>){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -131,11 +134,7 @@ private fun TransactionTab(){
             PieChart(modifier = Modifier
                 .height(200.dp)
                 .width(100.dp),
-                input = listOf(
-                    Needs(color = PrimaryNeeds,"Primary",15, false),
-                    Needs(color = SecondaryNeeds,"Secondary",15,false),
-                    Needs(color = TertiaryNeeds,"Tertiary",15,false)
-                ),
+                input = transactions,
                 radius = 240f)
 
 
@@ -148,10 +147,17 @@ private fun TransactionTab(){
                 colors = CardDefaults.cardColors(containerColor = Color.White)
 
             ){
-                Column(modifier = Modifier.padding(10.dp),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(15.dp)) {
-                    FundFraction()
-                    FundFraction()
-                    Text(modifier = Modifier.padding(vertical = 5.dp),text = "Lihat Lebih Banyak")
+                Column(modifier=Modifier.wrapContentSize(), horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    LazyColumn(modifier = Modifier.padding(10.dp),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(15.dp),content = {
+                        items(transactions){
+                                item -> FundFraction(modifier = Modifier
+                            .wrapContentHeight()
+                            .width(125.dp), needs = item)
+                        }
+                    })
+                    Text(modifier = Modifier.padding(bottom = 15.dp),text = "Lihat Lebih Banyak")
+
+
                 }
             }
 
@@ -162,7 +168,7 @@ private fun TransactionTab(){
     }
 }
 @Composable
-private fun AllocationTab(){
+private fun AllocationTab(allocations: List<Needs>){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -180,11 +186,7 @@ private fun AllocationTab(){
             PieChart(modifier = Modifier
                 .height(200.dp)
                 .width(100.dp),
-                input = listOf(
-                    Needs(color = Color(0xFF4891FF),"Primary",15, false),
-                    Needs(color = Color(0xFFFF753A),"Secondary",15,false),
-                    Needs(color = Color(0xFF00C77F),"Tertiary",15,false)
-                ),
+                input = allocations,
                 radius = 240f)
 
 
@@ -197,11 +199,20 @@ private fun AllocationTab(){
                 colors = CardDefaults.cardColors(containerColor = Color.White)
 
             ){
-                Column(modifier = Modifier.padding(10.dp),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(15.dp)) {
-                    FundFraction()
-                    FundFraction()
-                    Text(modifier = Modifier.padding(vertical = 5.dp),text = "Lihat Lebih Banyak")
+                Column(modifier=Modifier.wrapContentSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    LazyColumn(modifier = Modifier.padding(10.dp),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(15.dp),content = {
+                        items(allocations){
+                                item -> FundFraction(modifier = Modifier
+                            .wrapContentHeight()
+                            .width(125.dp), needs = item)
+                        }
+                    })
+                    Text(modifier = Modifier.padding(bottom = 15.dp),text = "Lihat Lebih Banyak")
+
+
                 }
+
+
             }
 
         }
@@ -212,18 +223,18 @@ private fun AllocationTab(){
 }
 
 @Composable
-private fun FundFraction(){
-    Row (verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)){
+private fun FundFraction(modifier : Modifier=Modifier,needs: Needs){
+    Row (modifier = modifier,verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)){
         Box(
             modifier = Modifier
                 .size(25.dp)
-                .background(shape = RoundedCornerShape(2.dp), color = Color.Red),
+                .background(shape = RoundedCornerShape(2.dp), color = needs.color),
 
             )
-        Column() {
-            Text(text = "Pemasukan")
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(text = needs.name)
 
-            Text(text = "Rp 2.300.000,00,-")
+            Text(text = needs.value.toString())
         }
     }
 }
@@ -274,7 +285,8 @@ private fun FundDialog(){
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight().padding(2.dp),
+            .wrapContentHeight()
+            .padding(2.dp),
         shape = Shape.extraSmall,
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)) {
@@ -293,8 +305,3 @@ private fun FundDialog(){
 
 
 
-@Composable
-@Preview
-fun MultiSelectorPreview(){
-    FundOptionTab()
-}

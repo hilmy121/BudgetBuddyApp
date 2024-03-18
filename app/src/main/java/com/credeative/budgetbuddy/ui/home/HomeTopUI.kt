@@ -14,9 +14,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +30,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.credeative.budgetbuddy.R
-import com.credeative.budgetbuddy.ui.theme.PrimaryColorContainer
 import com.credeative.budgetbuddy.ui.theme.Shape
 import com.credeative.budgetbuddy.ui.theme.TopUiShape
 import com.credeative.budgetbuddy.ui.theme.Typography
@@ -124,31 +125,27 @@ fun FundOption(modifier: Modifier = Modifier){
 
 @Composable
 fun FundInformation(modifier: Modifier = Modifier){
-    Card(modifier = modifier.height(85.dp), shape = Shape.small, border = BorderStroke(0.5.dp, Color.White)){
-        Surface(color = PrimaryColorContainer, modifier = Modifier.fillMaxSize()) {
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .align(alignment = Alignment.CenterHorizontally)
-            ){
-                Row (modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.CenterEnd), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.Top){
-                    Spacer(modifier = Modifier.fillMaxWidth(0.5f))
-                    Image(
-                        painter = painterResource(id = R.drawable.bg_amount_card_green),
-                        contentDescription = null,
-                        modifier=Modifier.weight(0.5f),
-                        contentScale = ContentScale.Crop)
-                }
-                Column(modifier = modifier
-                    .padding(10.dp)
-                    .align(Alignment.CenterStart), horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                    Text(text = "Aset Saya", style = Typography.labelMedium, color = Color.White)
-                    Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
-                }
+    Card(modifier = modifier.height(85.dp), shape = Shape.small, colors = CardDefaults.cardColors(containerColor = Color(0xFF0303B4))){
+        Box(modifier = Modifier
+            .fillMaxWidth().wrapContentSize()
+            .align(alignment = Alignment.CenterHorizontally)
+        ){
+            Row (modifier = Modifier
+                .fillMaxSize()
+                .align(Alignment.CenterEnd), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.Top){
+                Spacer(modifier = Modifier.fillMaxWidth(0.5f))
+                Image(
+                    painter = painterResource(id = R.drawable.bg_amount_card_green),
+                    contentDescription = null,
+                    modifier=Modifier.weight(0.5f),
+                    contentScale = ContentScale.Crop)
             }
-
-
+            Column(modifier = modifier
+                .padding(10.dp)
+                .align(Alignment.CenterStart), horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                Text(text = "Aset Saya", style = Typography.labelMedium, color = Color.White)
+                Text(text = "Rp. 32.000.000.00", style = Typography.bodyLarge, color = Color.White)
+            }
         }
     }
 }

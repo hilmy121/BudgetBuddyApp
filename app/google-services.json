@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "558692592148",
+    "project_id": "keuanganku-42de2",
+    "storage_bucket": "keuanganku-42de2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558692592148:android:9e62a22c9eb1002db59501",
+        "android_client_info": {
+          "package_name": "com.credeative.budgetbuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrJKy2AbfU1Br8PXAUnM-zg6dQwoAtVTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,13 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.credeative.budgetbuddy.data.datamodel.Needs
 
 @Composable
-fun HomeContentUI(){
+fun HomeContentUI(allocationList: List<Needs>,transactionList: List<Needs>){
     Column (
         modifier=Modifier.fillMaxWidth().wrapContentHeight()){
 
-        FundOptionTab()
+        FundOptionTab(allocations = allocationList, transactions = transactionList)
 
     }
 }
@@ -25,9 +26,5 @@ fun HomeContentUI(){
 
 
 
-@Composable
-@Preview(showBackground = true)
-fun HomeContentUIPreview(){
-    HomeContentUI()
-}
+
 
