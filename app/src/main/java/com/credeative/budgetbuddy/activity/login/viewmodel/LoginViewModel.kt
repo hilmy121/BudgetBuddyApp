@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.credeative.budgetbuddy.R
 import com.credeative.budgetbuddy.data.state.LoginState
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
@@ -16,9 +17,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.annotation.Nullable
 
 class LoginViewModel (private val application: Application): ViewModel() {
@@ -38,6 +41,12 @@ class LoginViewModel (private val application: Application): ViewModel() {
     fun updateEmail(logEmail:String):LiveData<String>{
         email.postValue(logEmail)
         return email
+    }
+
+    fun requestLoginGoogle(){
+        viewModelScope.launch(Dispatchers.IO) {
+            //CodeLogin here
+        }
     }
 
 //    fun updateEmailState(email:String){
