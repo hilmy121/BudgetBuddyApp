@@ -12,7 +12,7 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
             val application = (this[APPLICATION_KEY] as BudgetBuddyApp)
-            val loginRepository = application.container.restApiRepository
+            val loginRepository = application.container.loginRepository
             LoginViewModel(application)
         }
 //        initializer {

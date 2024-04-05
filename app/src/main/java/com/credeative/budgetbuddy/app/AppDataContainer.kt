@@ -6,7 +6,10 @@ import com.credeative.budgetbuddy.dependency.db.repository.OfflineRepositoryCont
 import com.credeative.budgetbuddy.dependency.db.repository.RoomRepository
 import com.credeative.budgetbuddy.dependency.http.RESTApiController
 import com.credeative.budgetbuddy.dependency.http.RESTApiEndpoint
+import com.credeative.budgetbuddy.dependency.http.login.LoginController
+import com.credeative.budgetbuddy.dependency.http.login.LoginEndpoint
 import com.credeative.budgetbuddy.dependency.http.repository.RESTApiRepository
+import com.credeative.budgetbuddy.dependency.http.repository.login.LoginRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -34,4 +37,8 @@ class AppDataContainer(private val context: Context):AppContainer {
     override val restApiRepository: RESTApiRepository by lazy {
         RESTApiController(RetrofitClient.create(RESTApiEndpoint::class.java))
     }
+    override val loginRepository: LoginRepository by lazy {
+        LoginController(RetrofitClient.create(LoginEndpoint::class.java))
+    }
+
 }
